@@ -19,7 +19,7 @@ module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) 
 
   fs.readFile(filePath, options, function(err, buf) {
     if (err) {
-      if (err.code === 'EISDIR') {
+      if (err.code === 'EISDIR' && options.directoryIndex !== false) {
         fs.readFile(path.join(filePath, options.directoryIndex), options, cb);
         return;
       }

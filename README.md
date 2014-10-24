@@ -52,7 +52,7 @@ In addition to the following, all [fs.readFile][readfile] options are available.
 
 ##### options.directoryIndex
 
-Type: `String`  
+Type: `String` or `Boolean`  
 Default: `index.html`
 
 A filename of the directory index contents (e.g. `index.php`).
@@ -64,7 +64,17 @@ readfileDirectoryIndexFallback('site/contents', {directoryIndex: 'home.html'}, f
   buf.toString(); //=> the contents of `site/contents/index.html`
 });
 ```
- 
+
+`false` disables the fallback feature, that is, this function becomes the same as [`fs.readFile`][readfile].
+
+```javascript
+// Even if index.html exists in the `foo` directory
+readfileDirectoryIndexFallback('foo', function(err, buf) {
+  err.code; //=> `EISDIR`
+  buf.toString(); //=> `undefined`
+});
+```
+
 #### callback(*error*, *buffer*)
 
 *error*: `Error` if it fails to read a file, otherwise `null`  

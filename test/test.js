@@ -5,7 +5,7 @@ var readFileDirectoryIndexFallback = require('../');
 var test = require('tape');
 
 test('takeout()', function(t) {
-  t.plan(12);
+  t.plan(13);
 
   readFileDirectoryIndexFallback('.gitattributes', function(err, buf) {
     t.error(err, 'should read the file.');
@@ -35,6 +35,13 @@ test('takeout()', function(t) {
     t.equal(
       err.code, 'EISDIR',
       'should pass an error to the callback when the directory index path points to a directory.'
+    );
+  });
+
+  readFileDirectoryIndexFallback('test', {directoryIndex: false}, function(err) {
+    t.equal(
+      err.code, 'EISDIR',
+      'should not use index.html as a fallback when `directoryIndex` option is `false`.'
     );
   });
 
