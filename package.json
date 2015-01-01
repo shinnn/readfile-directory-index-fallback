@@ -42,5 +42,11 @@
     "jscs": "^1.9.0",
     "tap-spec": "^2.1.2",
     "tape": "^3.0.3"
+  },
+  "jscsConfig": {
+    "preset": "google",
+    "maximumLineLength": 98,
+    "requireBlocksOnNewline": true,
+    "validateLineBreaks": "LF"
   }
 }
