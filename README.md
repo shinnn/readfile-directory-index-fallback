@@ -1,9 +1,9 @@
 # readfile-directory-index-fallback
 
-[![NPM version](https://badge.fury.io/js/readfile-directory-index-fallback.svg)](https://www.npmjs.org/package/readfile-directory-index-fallback)
+[![NPM version](https://img.shields.io/npm/v/readfile-directory-index-fallback.svg?style=flat)](https://www.npmjs.com/package/readfile-directory-index-fallback)
 [![Build Status](https://travis-ci.org/shinnn/readfile-directory-index-fallback.svg?branch=master)](https://travis-ci.org/shinnn/readfile-directory-index-fallback)
 [![Build status](https://ci.appveyor.com/api/projects/status/r01bvq5lpmx7xfc0?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/readfile-directory-index-fallback)
-[![Coverage Status](https://img.shields.io/coveralls/shinnn/readfile-directory-index-fallback.svg)](https://coveralls.io/r/shinnn/readfile-directory-index-fallback)
+[![Coverage Status](https://img.shields.io/coveralls/shinnn/readfile-directory-index-fallback.svg?style=flat)](https://coveralls.io/r/shinnn/readfile-directory-index-fallback)
 [![devDependency Status](https://david-dm.org/shinnn/readfile-directory-index-fallback/dev-status.svg)](https://david-dm.org/shinnn/readfile-directory-index-fallback#info=devDependencies)
 
 [fs.readFile][readfile] using the directory index as a fallback
@@ -20,7 +20,7 @@ readfileDirectoryIndexFallback('foo', function(err, buf) {
 
 ## Installation
 
-[Use npm](https://www.npmjs.org/doc/cli/npm-install.html).
+[Use npm.](https://docs.npmjs.com/cli/install)
 
 ```sh
 npm install readfile-directory-index-fallback
