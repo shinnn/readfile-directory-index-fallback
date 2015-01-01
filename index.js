@@ -13,14 +13,29 @@ module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) 
     options = {};
   }
 
-  if (options.directoryIndex === undefined) {
-    options.directoryIndex = 'index.html';
+  if (typeof cb !== 'function') {
+    throw new TypeError(
+      cb +
+      ' is not a function. The last argument must be a callback function.'
+    );
+  }
+
+  var directoryIndex;
+  if (options.directoryIndex === undefined || options.directoryIndex === true) {
+    directoryIndex = 'index.html';
+  } else if (typeof options.directoryIndex === 'string') {
+    directoryIndex = options.directoryIndex;
+  } else if (options.directoryIndex !== false) {
+    throw new TypeError(
+      'directoryIndex option must be a string or a boolean, but it was ' +
+      typeof options.directoryIndex + '.'
+    );
   }
 
   fs.readFile(filePath, options, function(err, buf) {
     if (err) {
-      if (err.code === 'EISDIR' && options.directoryIndex !== false) {
-        fs.readFile(path.join(filePath, options.directoryIndex), options, cb);
+      if (err.code === 'EISDIR' && directoryIndex) {
+        fs.readFile(path.join(filePath, directoryIndex), options, cb);
         return;
       }
 

@@ -1,67 +1,92 @@
 'use strict';
 
-var noop = require('nop');
-var readFileDirectoryIndexFallback = require('../');
+var readFileDirectoryIndexFallback = require('..');
 var test = require('tape');
 
-test('takeout()', function(t) {
-  t.plan(13);
+test('readFileDirectoryIndexFallback()', function(t) {
+  t.plan(12);
 
-  readFileDirectoryIndexFallback('.gitattributes', function(err, buf) {
-    t.error(err, 'should read the file.');
-    t.equal(buf.toString(), '* text=auto\n', 'should pass a valid buffer to the callback.');
-  });
+  t.equal(
+    readFileDirectoryIndexFallback.name,
+    'readFileDirectoryIndexFallback',
+    'should have a function name.'
+  );
 
-  readFileDirectoryIndexFallback('test', function(err, buf) {
-    t.error(err, 'should read index.html of the directory.');
-    t.equal(
-      buf.toString(), 'foo\n',
-      'should pass a valid buffer of the directory index file to the callback.'
+  var option = {directoryIndex: true};
+
+  readFileDirectoryIndexFallback('.gitattributes', option, function(err, buf) {
+    t.deepEqual(
+      [err, buf],
+      [null, new Buffer('* text=auto\n')],
+      'should read a file.'
+    );
+    t.deepEqual(
+      option,
+      {directoryIndex: true},
+      'should not modify the original option object.'
     );
   });
 
-  readFileDirectoryIndexFallback('test', {directoryIndex: 'test.js'}, function(err) {
-    t.error(err, 'should read the specified directory index file.');
+  readFileDirectoryIndexFallback('test', 'utf8', function(err, buf) {
+    t.deepEqual([err, buf], [null, 'foo\n'], 'should read index.html of the directory.');
+  });
+
+  readFileDirectoryIndexFallback('./', {
+    directoryIndex: '.gitattributes',
+    encoding: 'utf8'
+  }, function(err, buf) {
+    t.deepEqual(
+      [err, buf],
+      [null, '* text=auto\n'],
+      'should read the specified directory index file.'
+    );
   });
 
   readFileDirectoryIndexFallback('foo', function(err) {
     t.equal(
-      err.code, 'ENOENT',
+      err.code,
+      'ENOENT',
       'should pass an error to the callback when the file doesn\'t exist.'
     );
   });
 
   readFileDirectoryIndexFallback('node_modules', {directoryIndex: '.bin'}, function(err) {
     t.equal(
-      err.code, 'EISDIR',
+      err.code,
+      'EISDIR',
       'should pass an error to the callback when the directory index path points to a directory.'
     );
   });
 
   readFileDirectoryIndexFallback('test', {directoryIndex: false}, function(err) {
     t.equal(
-      err.code, 'EISDIR',
+      err.code,
+      'EISDIR',
       'should not use index.html as a fallback when `directoryIndex` option is `false`.'
     );
   });
 
-  readFileDirectoryIndexFallback('test', {encoding: 'base64'}, function(err, output) {
-    t.error(err, 'should accept fs.readFile options.');
-    t.equal(output, 'Zm9vCg==', 'should reflect fs.readFile options in the output.');
-  });
-
   t.throws(
-    readFileDirectoryIndexFallback.bind(['test'], noop), /TypeError/,
+    readFileDirectoryIndexFallback.bind(null, ['test'], t.fail),
+    /TypeError.*path/,
     'should throw a type error when it takes non-string value as its first argument.'
   );
 
   t.throws(
-    readFileDirectoryIndexFallback.bind('test', {}), /TypeError/,
+    readFileDirectoryIndexFallback.bind(null, 'test', {}),
+    /TypeError.*must be.*function/,
     'should throw a type error when it takes non-function value as its last argument.'
   );
 
   t.throws(
-    readFileDirectoryIndexFallback.bind('test', {directoryIndex: true}, noop), /TypeError/,
-    'should throw a type error when `directoryIndex` option takes a non-string value.'
+    readFileDirectoryIndexFallback.bind(null, 'test', {directoryIndex: 123}, t.fail),
+    /TypeError.*must be a string or a boolean/,
+    'should throw a type error when `directoryIndex` option is neither boolean nor string.'
+  );
+
+  t.throws(
+    readFileDirectoryIndexFallback.bind(null),
+    /TypeError.*must be.*function/,
+    'should throw a type error when it takes no arguments.'
   );
 });
