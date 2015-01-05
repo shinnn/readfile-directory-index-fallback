@@ -1,6 +1,6 @@
 {
   "name": "readfile-directory-index-fallback",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "fs.readFile using the directory index as a fallback",
   "repository": "shinnn/readfile-directory-index-fallback",
   "author": {
