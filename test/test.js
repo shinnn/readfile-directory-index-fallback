@@ -4,7 +4,7 @@ var readFileDirectoryIndexFallback = require('..');
 var test = require('tape');
 
 test('readFileDirectoryIndexFallback()', function(t) {
-  t.plan(12);
+  t.plan(13);
 
   t.equal(
     readFileDirectoryIndexFallback.name,
@@ -42,11 +42,11 @@ test('readFileDirectoryIndexFallback()', function(t) {
     );
   });
 
-  readFileDirectoryIndexFallback('foo', function(err) {
+  readFileDirectoryIndexFallback('foo', {directoryIndex: true}, function(err) {
     t.equal(
       err.code,
       'ENOENT',
-      'should pass an error to the callback when the file doesn\'t exist.'
+      'should pass an error to the callback when the directory index doesn\'t exist.'
     );
   });
 
@@ -55,6 +55,15 @@ test('readFileDirectoryIndexFallback()', function(t) {
       err.code,
       'EISDIR',
       'should pass an error to the callback when the directory index path points to a directory.'
+    );
+  });
+
+  readFileDirectoryIndexFallback('node_modules', function(err) {
+    t.equal(
+      err.code,
+      'EISDIR',
+      'should pass the first error to the callback when the index file doesn\'t exist ' +
+      'under the target directory.'
     );
   });
 

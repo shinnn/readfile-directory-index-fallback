@@ -33,14 +33,24 @@ module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) 
     );
   }
 
-  fs.readFile(filePath, options, function(err, buf) {
-    if (err) {
-      if (err.code === 'EISDIR' && directoryIndex) {
-        fs.readFile(path.join(filePath, directoryIndex), options, cb);
+  fs.readFile(filePath, options, function(firstErr, firstBuf) {
+    if (firstErr) {
+      if (firstErr.code === 'EISDIR' && directoryIndex) {
+        fs.readFile(path.join(filePath, directoryIndex), options, function(err, buf) {
+          if (err) {
+            if (typeof options.directoryIndex !== 'string') {
+              err = firstErr;
+            }
+            cb(err);
+            return;
+          }
+
+          cb(null, stripBom(buf));
+        });
         return;
       }
 
-      cb(err);
+      cb(firstErr);
       return;
     }
 
