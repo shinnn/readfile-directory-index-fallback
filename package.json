@@ -35,6 +35,9 @@
     "asynchronous",
     "buffer"
   ],
+  "dependencies": {
+    "strip-bom": "^1.0.0"
+  },
   "devDependencies": {
     "eslint": "^0.11.0",
     "istanbul": "^0.3.5",

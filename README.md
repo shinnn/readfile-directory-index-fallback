@@ -35,7 +35,7 @@ var readfileDescendantFallback = require('readfile-directory-index-fallback');
 ### readfileDirectoryIndexFallback(*filePath*,[ *options*,] *callback*)
 
 *filePath*: `String`  
-*options*: `Object` ([`fs.readFile`][readfile] options)  
+*options*: `Object` ([`fs.readFile`][readfile] options) or `String` (encoding)  
 *callback*: `Function`
 
 First, it tries to read a file at *filePath*. Then,
@@ -76,7 +76,9 @@ readfileDirectoryIndexFallback('foo', function(err, buf) {
 #### callback(*error*, *buffer*)
 
 *error*: `Error` if it fails to read a file, otherwise `null`  
-*buffer*: `Buffer` or `String` (according to [`fs.readFile`][readfile] option)
+*buffer*: [`Buffer`](http://nodejs.org/api/buffer.html#buffer_class_buffer) or `String` (according to [`fs.readFile`][readfile] option)
+
+It automatically strips [UTF-8 byte order mark](http://en.wikipedia.org/wiki/Byte_order_mark#UTF-8) from the result.
 
 ## License
 

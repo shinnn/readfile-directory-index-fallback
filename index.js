@@ -6,6 +6,7 @@
 
 var fs = require('fs');
 var path = require('path');
+var stripBom = require('strip-bom');
 
 module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) {
   if (cb === undefined) {
@@ -43,6 +44,6 @@ module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) 
       return;
     }
 
-    cb(err, buf);
+    cb(null, stripBom(firstBuf));
   });
 };
