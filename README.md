@@ -4,7 +4,8 @@
 [![Build Status](https://travis-ci.org/shinnn/readfile-directory-index-fallback.svg?branch=master)](https://travis-ci.org/shinnn/readfile-directory-index-fallback)
 [![Build status](https://ci.appveyor.com/api/projects/status/r01bvq5lpmx7xfc0?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/readfile-directory-index-fallback)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/readfile-directory-index-fallback.svg?style=flat)](https://coveralls.io/r/shinnn/readfile-directory-index-fallback)
-[![devDependency Status](https://david-dm.org/shinnn/readfile-directory-index-fallback/dev-status.svg)](https://david-dm.org/shinnn/readfile-directory-index-fallback#info=devDependencies)
+[![Dependency Status](https://img.shields.io/david/shinnn/readfile-directory-index-fallback.svg?style=flat&label=deps)](https://david-dm.org/shinnn/readfile-directory-index-fallback)
+[![devDependency Status](https://img.shields.io/david/dev/shinnn/readfile-directory-index-fallback.svg?style=flat&label=devDeps)](https://david-dm.org/shinnn/readfile-directory-index-fallback#info=devDependencies)
 
 [fs.readFile][readfile] using the directory index as a fallback
 
