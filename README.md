@@ -1,11 +1,11 @@
 # readfile-directory-index-fallback
 
-[![NPM version](https://img.shields.io/npm/v/readfile-directory-index-fallback.svg?style=flat)](https://www.npmjs.com/package/readfile-directory-index-fallback)
+[![NPM version](https://img.shields.io/npm/v/readfile-directory-index-fallback.svg)](https://www.npmjs.com/package/readfile-directory-index-fallback)
 [![Build Status](https://travis-ci.org/shinnn/readfile-directory-index-fallback.svg?branch=master)](https://travis-ci.org/shinnn/readfile-directory-index-fallback)
 [![Build status](https://ci.appveyor.com/api/projects/status/r01bvq5lpmx7xfc0?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/readfile-directory-index-fallback)
-[![Coverage Status](https://img.shields.io/coveralls/shinnn/readfile-directory-index-fallback.svg?style=flat)](https://coveralls.io/r/shinnn/readfile-directory-index-fallback)
-[![Dependency Status](https://img.shields.io/david/shinnn/readfile-directory-index-fallback.svg?style=flat&label=deps)](https://david-dm.org/shinnn/readfile-directory-index-fallback)
-[![devDependency Status](https://img.shields.io/david/dev/shinnn/readfile-directory-index-fallback.svg?style=flat&label=devDeps)](https://david-dm.org/shinnn/readfile-directory-index-fallback#info=devDependencies)
+[![Coverage Status](https://img.shields.io/coveralls/shinnn/readfile-directory-index-fallback.svg)](https://coveralls.io/r/shinnn/readfile-directory-index-fallback)
+[![Dependency Status](https://img.shields.io/david/shinnn/readfile-directory-index-fallback.svg?label=deps)](https://david-dm.org/shinnn/readfile-directory-index-fallback)
+[![devDependency Status](https://img.shields.io/david/dev/shinnn/readfile-directory-index-fallback.svg?label=devDeps)](https://david-dm.org/shinnn/readfile-directory-index-fallback#info=devDependencies)
 
 [fs.readFile][readfile] using the directory index as a fallback
 
@@ -77,13 +77,13 @@ readfileDirectoryIndexFallback('foo', function(err, buf) {
 #### callback(*error*, *buffer*)
 
 *error*: `Error` if it fails to read a file, otherwise `null`  
-*buffer*: [`Buffer`](http://nodejs.org/api/buffer.html#buffer_class_buffer) or `String` (according to [`fs.readFile`][readfile] option)
+*buffer*: [`Buffer`](https://iojs.org/api/buffer.html#buffer_class_buffer) or `String` (according to [`fs.readFile`][readfile] option)
 
 It automatically strips [UTF-8 byte order mark](http://en.wikipedia.org/wiki/Byte_order_mark#UTF-8) from the result.
 
 ## License
 
-Copyright (c) 2014 [Shinnosuke Watanabe](https://github.com/shinnn)
+Copyright (c) 2014 - 2015 [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE).
 
