@@ -68,9 +68,8 @@ readfileDirectoryIndexFallback('site/contents', {directoryIndex: 'home.html'}, f
 
 ```javascript
 // Even if index.html exists in the `foo` directory
-readfileDirectoryIndexFallback('foo', function(err, buf) {
+readfileDirectoryIndexFallback('foo', {directoryIndex: false}, function(err) {
   err.code; //=> `EISDIR`
-  buf.toString(); //=> `undefined`
 });
 ```
 
