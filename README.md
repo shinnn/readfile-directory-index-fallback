@@ -10,11 +10,10 @@
 [fs.readFile][readfile] using the directory index as a fallback
 
 ```javascript
-var readfileDirectoryIndexFallback = require('readfile-directory-index-fallback');
+const readfileDirectoryIndexFallback = require('readfile-directory-index-fallback');
 
 // When the file `index.html` exists in the `foo` directory
-readfileDirectoryIndexFallback('foo', function(err, buf) {
-  err; //=> null
+readfileDirectoryIndexFallback('foo', (err, buf) => {
   buf.toString(); //=> the contents of `foo/index.html`
 });
 ```
@@ -23,14 +22,14 @@ readfileDirectoryIndexFallback('foo', function(err, buf) {
 
 [Use npm.](https://docs.npmjs.com/cli/install)
 
-```sh
+```
 npm install readfile-directory-index-fallback
 ```
 
 ## API
 
 ```javascript
-var readfileDescendantFallback = require('readfile-directory-index-fallback');
+const readfileDescendantFallback = require('readfile-directory-index-fallback');
 ```
 
 ### readfileDirectoryIndexFallback(*filePath*,[ *options*,] *callback*)
@@ -58,8 +57,7 @@ A filename of the directory index contents (e.g. `index.php`).
 
 ```javascript
 // When the file `home.html` exists in the `site/contents` directory
-readfileDirectoryIndexFallback('site/contents', {directoryIndex: 'home.html'}, function(err, buf) {
-  err; //=> null
+readfileDirectoryIndexFallback('site/contents', {directoryIndex: 'home.html'}, (err, buf) => {
   buf.toString(); //=> the contents of `site/contents/index.html`
 });
 ```
@@ -68,7 +66,7 @@ readfileDirectoryIndexFallback('site/contents', {directoryIndex: 'home.html'}, f
 
 ```javascript
 // Even if index.html exists in the `foo` directory
-readfileDirectoryIndexFallback('foo', {directoryIndex: false}, function(err) {
+readfileDirectoryIndexFallback('foo', {directoryIndex: false}, err => {
   err.code; //=> `EISDIR`
 });
 ```
@@ -78,7 +76,7 @@ readfileDirectoryIndexFallback('foo', {directoryIndex: false}, function(err) {
 *error*: `Error` if it fails to read a file, otherwise `null`  
 *buffer*: [`Buffer`](https://iojs.org/api/buffer.html#buffer_class_buffer) or `String` (according to [`fs.readFile`][readfile] option)
 
-It automatically strips [UTF-8 byte order mark](http://en.wikipedia.org/wiki/Byte_order_mark#UTF-8) from the result.
+It automatically strips [UTF-8 byte order mark](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8) from the result.
 
 ## License
 
@@ -86,4 +84,4 @@ Copyright (c) 2014 - 2015 [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE).
 
-[readfile]: http://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback
+[readfile]: https://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback
