@@ -3,10 +3,7 @@
   "version": "1.2.0",
   "description": "fs.readFile using the directory index as a fallback",
   "repository": "shinnn/readfile-directory-index-fallback",
-  "author": {
-    "name": "Shinnosuke Watanabe",
-    "url": "https://github.com/shinnn"
-  },
+  "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
   "scripts": {
     "pretest": "eslint --config node_modules/@shinnn/eslintrc-node/rc.json index.js test/test.js",
     "test": "node test/test.js | tap-spec",
@@ -34,10 +31,10 @@
   },
   "devDependencies": {
     "@shinnn/eslintrc-node": "^1.0.2",
-    "eslint": "^0.21.2",
-    "istanbul": "^0.3.14",
-    "istanbul-coveralls": "^1.0.2",
-    "tap-spec": "^3.0.0",
+    "eslint": "^0.22.1",
+    "istanbul": "^0.3.15",
+    "istanbul-coveralls": "^1.0.3",
+    "tap-spec": "^4.0.0",
     "tape": "^4.0.0"
   }
 }
