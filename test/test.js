@@ -1,9 +1,9 @@
 'use strict';
 
-var readFileDirectoryIndexFallback = require('..');
-var test = require('tape');
+const readFileDirectoryIndexFallback = require('..');
+const test = require('tape');
 
-test('readFileDirectoryIndexFallback()', function(t) {
+test('readFileDirectoryIndexFallback()', t => {
   t.plan(13);
 
   t.equal(
@@ -12,23 +12,15 @@ test('readFileDirectoryIndexFallback()', function(t) {
     'should have a function name.'
   );
 
-  var option = {directoryIndex: true};
+  const option = {directoryIndex: true};
 
-  readFileDirectoryIndexFallback('.gitattributes', option, function(err, buf) {
-    t.deepEqual(
-      [err, buf],
-      [null, new Buffer('* text=auto\n')],
-      'should read a file.'
-    );
-    t.deepEqual(
-      option,
-      {directoryIndex: true},
-      'should not modify the original option object.'
-    );
+  readFileDirectoryIndexFallback('.gitattributes', option, (...args) => {
+    t.deepEqual(args, [null, new Buffer('* text=auto\n')], 'should read a file.');
+    t.deepEqual(option, {directoryIndex: true}, 'should not modify the original option object.');
   });
 
-  readFileDirectoryIndexFallback('test', 'utf8', function(err, buf) {
-    t.deepEqual([err, buf], [null, 'foo\n'], 'should read index.html of the directory.');
+  readFileDirectoryIndexFallback('test', 'utf8', (...args) => {
+    t.deepEqual(args, [null, 'foo\n'], 'should read index.html of the directory.');
   });
 
   readFileDirectoryIndexFallback('./', {
@@ -42,7 +34,7 @@ test('readFileDirectoryIndexFallback()', function(t) {
     );
   });
 
-  readFileDirectoryIndexFallback('foo', {directoryIndex: true}, function(err) {
+  readFileDirectoryIndexFallback('foo', {directoryIndex: true}, err => {
     t.equal(
       err.code,
       'ENOENT',
@@ -50,7 +42,7 @@ test('readFileDirectoryIndexFallback()', function(t) {
     );
   });
 
-  readFileDirectoryIndexFallback('node_modules', {directoryIndex: '.bin'}, function(err) {
+  readFileDirectoryIndexFallback('node_modules', {directoryIndex: '.bin'}, err => {
     t.equal(
       err.code,
       'EISDIR',
@@ -58,7 +50,7 @@ test('readFileDirectoryIndexFallback()', function(t) {
     );
   });
 
-  readFileDirectoryIndexFallback('node_modules', function(err) {
+  readFileDirectoryIndexFallback('node_modules', err => {
     t.equal(
       err.code,
       'EISDIR',
@@ -67,7 +59,7 @@ test('readFileDirectoryIndexFallback()', function(t) {
     );
   });
 
-  readFileDirectoryIndexFallback('test', {directoryIndex: false}, function(err) {
+  readFileDirectoryIndexFallback('test', {directoryIndex: false}, err => {
     t.equal(
       err.code,
       'EISDIR',
@@ -76,25 +68,25 @@ test('readFileDirectoryIndexFallback()', function(t) {
   });
 
   t.throws(
-    readFileDirectoryIndexFallback.bind(null, ['test'], t.fail),
+    () => readFileDirectoryIndexFallback(['test'], t.fail),
     /TypeError.*path/,
     'should throw a type error when it takes non-string value as its first argument.'
   );
 
   t.throws(
-    readFileDirectoryIndexFallback.bind(null, 'test', {}),
+    () => readFileDirectoryIndexFallback('test', {}),
     /TypeError.*must be.*function/,
     'should throw a type error when it takes non-function value as its last argument.'
   );
 
   t.throws(
-    readFileDirectoryIndexFallback.bind(null, 'test', {directoryIndex: 123}, t.fail),
+    () => readFileDirectoryIndexFallback('test', {directoryIndex: 123}, t.fail),
     /TypeError.*must be a string or a boolean/,
     'should throw a type error when `directoryIndex` option is neither boolean nor string.'
   );
 
   t.throws(
-    readFileDirectoryIndexFallback.bind(null),
+    () => readFileDirectoryIndexFallback(),
     /TypeError.*must be.*function/,
     'should throw a type error when it takes no arguments.'
   );

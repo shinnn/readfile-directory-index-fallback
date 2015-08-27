@@ -4,9 +4,9 @@
 */
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var stripBom = require('strip-bom');
+const fs = require('graceful-fs');
+const path = require('path');
+const stripBom = require('strip-bom');
 
 module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) {
   if (cb === undefined) {
@@ -21,7 +21,7 @@ module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) 
     );
   }
 
-  var directoryIndex;
+  let directoryIndex;
   if (options.directoryIndex === undefined || options.directoryIndex === true) {
     directoryIndex = 'index.html';
   } else if (typeof options.directoryIndex === 'string') {
@@ -33,10 +33,10 @@ module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) 
     );
   }
 
-  fs.readFile(filePath, options, function(firstErr, firstBuf) {
+  fs.readFile(filePath, options, (firstErr, firstBuf) => {
     if (firstErr) {
       if (firstErr.code === 'EISDIR' && directoryIndex) {
-        fs.readFile(path.join(filePath, directoryIndex), options, function(err, buf) {
+        fs.readFile(path.join(filePath, directoryIndex), options, (err, buf) => {
           if (err) {
             if (typeof options.directoryIndex !== 'string') {
               err = firstErr;

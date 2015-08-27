@@ -74,7 +74,7 @@ readfileDirectoryIndexFallback('foo', {directoryIndex: false}, err => {
 #### callback(*error*, *buffer*)
 
 *error*: `Error` if it fails to read a file, otherwise `null`  
-*buffer*: [`Buffer`](https://iojs.org/api/buffer.html#buffer_class_buffer) or `String` (according to [`fs.readFile`][readfile] option)
+*buffer*: [`Buffer`](https://nodejs.org/api/buffer.html#buffer_class_buffer) or `String` (according to [`fs.readFile`][readfile] option)
 
 It automatically strips [UTF-8 byte order mark](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8) from the result.
 
