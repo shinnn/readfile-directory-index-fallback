@@ -1,13 +1,11 @@
 # readfile-directory-index-fallback
 
-[![NPM version](https://img.shields.io/npm/v/readfile-directory-index-fallback.svg)](https://www.npmjs.com/package/readfile-directory-index-fallback)
+[![npm version](https://img.shields.io/npm/v/readfile-directory-index-fallback.svg)](https://www.npmjs.com/package/readfile-directory-index-fallback)
 [![Build Status](https://travis-ci.org/shinnn/readfile-directory-index-fallback.svg?branch=master)](https://travis-ci.org/shinnn/readfile-directory-index-fallback)
-[![Build status](https://ci.appveyor.com/api/projects/status/r01bvq5lpmx7xfc0?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/readfile-directory-index-fallback)
+[![Build status](https://ci.appveyor.com/api/projects/status/r01bvq5lpmx7xfc0/branch/master?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/readfile-directory-index-fallback/branch/master)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/readfile-directory-index-fallback.svg)](https://coveralls.io/r/shinnn/readfile-directory-index-fallback)
-[![Dependency Status](https://img.shields.io/david/shinnn/readfile-directory-index-fallback.svg?label=deps)](https://david-dm.org/shinnn/readfile-directory-index-fallback)
-[![devDependency Status](https://img.shields.io/david/dev/shinnn/readfile-directory-index-fallback.svg?label=devDeps)](https://david-dm.org/shinnn/readfile-directory-index-fallback#info=devDependencies)
 
-[fs.readFile][readfile] using the directory index as a fallback
+[`fs.readFile`][readfile] using the directory index as a fallback
 
 ```javascript
 const readfileDirectoryIndexFallback = require('readfile-directory-index-fallback');
@@ -20,7 +18,7 @@ readfileDirectoryIndexFallback('foo', (err, buf) => {
 
 ## Installation
 
-[Use npm.](https://docs.npmjs.com/cli/install)
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
 
 ```
 npm install readfile-directory-index-fallback
@@ -34,8 +32,8 @@ const readfileDescendantFallback = require('readfile-directory-index-fallback');
 
 ### readfileDirectoryIndexFallback(*filePath*,[ *options*,] *callback*)
 
-*filePath*: `String`  
-*options*: `Object` ([`fs.readFile`][readfile] options) or `String` (encoding)  
+*filePath*: `string`  
+*options*: `Object` ([`fs.readFile`][readfile] options) or `string` (encoding)  
 *callback*: `Function`
 
 First, it tries to read a file at *filePath*. Then,
@@ -50,8 +48,8 @@ In addition to the following, all [fs.readFile][readfile] options are available.
 
 ##### options.directoryIndex
 
-Type: `String` or `Boolean`  
-Default: `index.html`
+Type: `string` or `boolean`  
+Default: `'index.html'`
 
 A filename of the directory index contents (e.g. `index.php`).
 
@@ -74,12 +72,10 @@ readfileDirectoryIndexFallback('foo', {directoryIndex: false}, err => {
 #### callback(*error*, *buffer*)
 
 *error*: `Error` if it fails to read a file, otherwise `null`  
-*buffer*: [`Buffer`](https://nodejs.org/api/buffer.html#buffer_class_buffer) or `String` (according to [`fs.readFile`][readfile] option)
+*buffer*: `Buffer` or `String` (according to [`fs.readFile`][readfile] option)
 
 ## License
 
-Copyright (c) 2014 - 2015 [Shinnosuke Watanabe](https://github.com/shinnn)
+[ISC License](./LICENSE) © 2017 Shinnosuke Watanabe
 
-Licensed under [the MIT License](./LICENSE).
-
-[readfile]: https://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback
+[readfile]: https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback
