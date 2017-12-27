@@ -76,8 +76,6 @@ readfileDirectoryIndexFallback('foo', {directoryIndex: false}, err => {
 *error*: `Error` if it fails to read a file, otherwise `null`  
 *buffer*: [`Buffer`](https://nodejs.org/api/buffer.html#buffer_class_buffer) or `String` (according to [`fs.readFile`][readfile] option)
 
-It automatically strips [UTF-8 byte order mark](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8) from the result.
-
 ## License
 
 Copyright (c) 2014 - 2015 [Shinnosuke Watanabe](https://github.com/shinnn)

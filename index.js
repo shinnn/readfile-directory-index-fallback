@@ -1,12 +1,7 @@
-/*!
- * readfile-directory-index-fallback | MIT (c) Shinnosuke Watanabe
- * https://github.com/shinnn/readfile-directory-index-fallback
-*/
 'use strict';
 
 const fs = require('graceful-fs');
 const path = require('path');
-const stripBom = require('strip-bom');
 
 module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) {
   if (cb === undefined) {
@@ -45,7 +40,7 @@ module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) 
             return;
           }
 
-          cb(null, stripBom(buf));
+          cb(null, buf);
         });
         return;
       }
@@ -54,6 +49,6 @@ module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) 
       return;
     }
 
-    cb(null, stripBom(firstBuf));
+    cb(null, firstBuf);
   });
 };
