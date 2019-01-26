@@ -1,11 +1,11 @@
 # readfile-directory-index-fallback
 
 [![npm version](https://img.shields.io/npm/v/readfile-directory-index-fallback.svg)](https://www.npmjs.com/package/readfile-directory-index-fallback)
-[![Build Status](https://travis-ci.org/shinnn/readfile-directory-index-fallback.svg?branch=master)](https://travis-ci.org/shinnn/readfile-directory-index-fallback)
+[![Build Status](https://travis-ci.com/shinnn/readfile-directory-index-fallback.svg?branch=master)](https://travis-ci.com/shinnn/readfile-directory-index-fallback)
 [![Build status](https://ci.appveyor.com/api/projects/status/r01bvq5lpmx7xfc0/branch/master?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/readfile-directory-index-fallback/branch/master)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/readfile-directory-index-fallback.svg)](https://coveralls.io/r/shinnn/readfile-directory-index-fallback)
 
-[`fs.readFile`][readfile] using the directory index as a fallback
+[`fs.readFile()`][readfile] using the directory index as a fallback
 
 ```javascript
 const readfileDirectoryIndexFallback = require('readfile-directory-index-fallback');
@@ -18,7 +18,7 @@ readfileDirectoryIndexFallback('foo', (err, buf) => {
 
 ## Installation
 
-[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/about-npm/).
 
 ```
 npm install readfile-directory-index-fallback
@@ -32,8 +32,8 @@ const readfileDescendantFallback = require('readfile-directory-index-fallback');
 
 ### readfileDirectoryIndexFallback(*filePath*,[ *options*,] *callback*)
 
-*filePath*: `string`  
-*options*: `Object` ([`fs.readFile`][readfile] options) or `string` (encoding)  
+*filePath*: `string` `Buffer` `Uint8Array` `URL` `integer`  
+*options*: `Object` ([`fs.readFile()`][readfile] options) or `string` (encoding)  
 *callback*: `Function`
 
 First, it tries to read a file at *filePath*. Then,
@@ -44,7 +44,7 @@ First, it tries to read a file at *filePath*. Then,
 
 #### options
 
-In addition to the following, all [fs.readFile][readfile] options are available.
+In addition to the following, all [`fs.readFile()`][readfile] options are available.
 
 ##### options.directoryIndex
 
@@ -76,6 +76,6 @@ readfileDirectoryIndexFallback('foo', {directoryIndex: false}, err => {
 
 ## License
 
-[ISC License](./LICENSE) © 2017 Shinnosuke Watanabe
+[ISC License](./LICENSE) © 2017 - 2019 Shinnosuke Watanabe
 
 [readfile]: https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback

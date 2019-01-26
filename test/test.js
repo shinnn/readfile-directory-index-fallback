@@ -63,25 +63,25 @@ test('readFileDirectoryIndexFallback()', t => {
 
 	t.throws(
 		() => readFileDirectoryIndexFallback(['test'], t.fail),
-		/TypeError.*path/,
+		/TypeError.*path/u,
 		'should throw a type error when it takes non-string value as its first argument.'
 	);
 
 	t.throws(
 		() => readFileDirectoryIndexFallback('test', {}),
-		/TypeError.*must be.*function/,
+		/TypeError.*must be.*function/u,
 		'should throw a type error when it takes non-function value as its last argument.'
 	);
 
 	t.throws(
 		() => readFileDirectoryIndexFallback('test', {directoryIndex: 123}, t.fail),
-		/TypeError.*must be a string or a boolean/,
+		/TypeError.*must be a string or a boolean/u,
 		'should throw a type error when `directoryIndex` option is neither boolean nor string.'
 	);
 
 	t.throws(
 		() => readFileDirectoryIndexFallback(),
-		/TypeError.*must be.*function/,
+		/TypeError.*must be.*function/u,
 		'should throw a type error when it takes no arguments.'
 	);
 });

@@ -1,7 +1,7 @@
 'use strict';
 
-const fs = require('graceful-fs');
 const path = require('path');
+const readFile = require('fs').readFile;
 
 module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) {
 	if (cb === undefined) {
@@ -10,11 +10,11 @@ module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) 
 	}
 
 	if (typeof cb !== 'function') {
-		throw new TypeError(`${cb
-		} is not a function. The last argument must be a callback function.`);
+		throw new TypeError(`${cb} is not a function. The last argument must be a callback function.`);
 	}
 
 	let directoryIndex;
+
 	if (options.directoryIndex === undefined || options.directoryIndex === true) {
 		directoryIndex = 'index.html';
 	} else if (typeof options.directoryIndex === 'string') {
@@ -24,10 +24,10 @@ module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) 
 			typeof options.directoryIndex}.`);
 	}
 
-	fs.readFile(filePath, options, (firstErr, firstBuf) => {
+	readFile(filePath, options, (firstErr, firstBuf) => {
 		if (firstErr) {
 			if (firstErr.code === 'EISDIR' && directoryIndex) {
-				fs.readFile(path.join(filePath, directoryIndex), options, (err, buf) => {
+				readFile(path.join(filePath, directoryIndex), options, (err, buf) => {
 					if (err) {
 						if (typeof options.directoryIndex !== 'string') {
 							err = firstErr;
