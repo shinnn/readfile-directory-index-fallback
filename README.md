@@ -2,7 +2,6 @@
 
 [![npm version](https://img.shields.io/npm/v/readfile-directory-index-fallback.svg)](https://www.npmjs.com/package/readfile-directory-index-fallback)
 [![Build Status](https://travis-ci.com/shinnn/readfile-directory-index-fallback.svg?branch=master)](https://travis-ci.com/shinnn/readfile-directory-index-fallback)
-[![Build status](https://ci.appveyor.com/api/projects/status/r01bvq5lpmx7xfc0/branch/master?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/readfile-directory-index-fallback/branch/master)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/readfile-directory-index-fallback.svg)](https://coveralls.io/r/shinnn/readfile-directory-index-fallback)
 
 [`fs.readFile()`][readfile] using the directory index as a fallback
