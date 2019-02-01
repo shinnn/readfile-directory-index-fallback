@@ -1,16 +1,24 @@
 'use strict';
 
-const path = require('path');
-const readFile = require('fs').readFile;
+const {join} = require('path');
+const {readFile} = require('fs');
 
-module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) {
-	if (cb === undefined) {
-		cb = options;
-		options = {};
+module.exports = function readFileDirectoryIndexFallback(...args) {
+	const argLen = args.length;
+
+	if (argLen !== 2 && argLen !== 3) {
+		throw new RangeError(`Expected 2 or 3 arguments (<string|Buffer|Uint8Array|URL|integer>[, <Object|string>], <Function>), but got ${
+			argLen === 0 ? 'no' : argLen
+		} arguments.`);
 	}
 
+	const [filePath, options, cb] = argLen === 2 ? [args[0], {}, args[1]] : args;
+
 	if (typeof cb !== 'function') {
-		throw new TypeError(`${cb} is not a function. The last argument must be a callback function.`);
+		const error = new TypeError(`${cb} is not a function. The last argument must be a callback function.`);
+		error.code = 'ERR_INVALID_ARG_TYPE';
+
+		throw error;
 	}
 
 	let directoryIndex;
@@ -27,7 +35,7 @@ module.exports = function readFileDirectoryIndexFallback(filePath, options, cb) 
 	readFile(filePath, options, (firstErr, firstBuf) => {
 		if (firstErr) {
 			if (firstErr.code === 'EISDIR' && directoryIndex) {
-				readFile(path.join(filePath, directoryIndex), options, (err, buf) => {
+				readFile(join(filePath, directoryIndex), options, (err, buf) => {
 					if (err) {
 						if (typeof options.directoryIndex !== 'string') {
 							err = firstErr;

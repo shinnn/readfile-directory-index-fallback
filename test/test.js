@@ -4,12 +4,12 @@ const readFileDirectoryIndexFallback = require('..');
 const test = require('tape');
 
 test('readFileDirectoryIndexFallback()', t => {
-	t.plan(12);
+	t.plan(8);
 
 	const option = {directoryIndex: true};
 
 	readFileDirectoryIndexFallback('.gitattributes', option, (...args) => {
-		t.deepEqual(args, [null, Buffer.from('* text=auto\n')], 'should read a file.');
+		t.deepEqual(args, [null, Buffer.from('* text=auto eol=lf\n')], 'should read a file.');
 		t.deepEqual(option, {directoryIndex: true}, 'should not modify the original option object.');
 	});
 
@@ -23,7 +23,7 @@ test('readFileDirectoryIndexFallback()', t => {
 	}, (err, buf) => {
 		t.deepEqual(
 			[err, buf],
-			[null, '* text=auto\n'],
+			[null, '* text=auto eol=lf\n'],
 			'should read the specified directory index file.'
 		);
 	});
@@ -60,28 +60,38 @@ test('readFileDirectoryIndexFallback()', t => {
 			'should not use index.html as a fallback when `directoryIndex` option is `false`.'
 		);
 	});
+});
 
+test('readFileDirectoryIndexFallback()', t => {
 	t.throws(
 		() => readFileDirectoryIndexFallback(['test'], t.fail),
-		/TypeError.*path/u,
-		'should throw a type error when it takes non-string value as its first argument.'
+		/^TypeError.*path/u,
+		'should fail when it takes non-string value as its first argument.'
 	);
 
 	t.throws(
 		() => readFileDirectoryIndexFallback('test', {}),
-		/TypeError.*must be.*function/u,
-		'should throw a type error when it takes non-function value as its last argument.'
+		/^TypeError.*must be.*function/u,
+		'should fail when it takes non-function value as its last argument.'
 	);
 
 	t.throws(
 		() => readFileDirectoryIndexFallback('test', {directoryIndex: 123}, t.fail),
-		/TypeError.*must be a string or a boolean/u,
-		'should throw a type error when `directoryIndex` option is neither boolean nor string.'
+		/^TypeError.*must be a string or a boolean/u,
+		'should fail when `directoryIndex` option is neither boolean nor string.'
 	);
 
 	t.throws(
 		() => readFileDirectoryIndexFallback(),
-		/TypeError.*must be.*function/u,
-		'should throw a type error when it takes no arguments.'
+		/^RangeError.*Expected 2 or 3 arguments \(.*\), but got no arguments\./u,
+		'should fail when it takes no arguments.'
 	);
+
+	t.throws(
+		() => readFileDirectoryIndexFallback('_', {}, t.fail, '_'),
+		/^RangeError.*Expected 2 or 3 arguments \(.*\), but got 4 arguments\./u,
+		'should fail when it takes too many arguments.'
+	);
+
+	t.end();
 });
