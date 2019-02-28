@@ -1,7 +1,7 @@
 {
 	"name": "readfile-directory-index-fallback",
-	"version": "2.0.0-3",
-	"description": "fs.readFile using the directory index as a fallback",
+	"version": "2.0.0-4",
+	"description": "fs.readFile() using the directory index as a fallback",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
 	"repository": "shinnn/readfile-directory-index-fallback",
 	"license": "ISC",
@@ -25,11 +25,11 @@
 		"buffer"
 	],
 	"devDependencies": {
-		"@shinnn/eslint-config": "^6.8.9",
-		"eslint": "^5.12.1",
-		"nyc": "^13.1.0",
+		"@shinnn/eslint-config": "^6.9.0",
+		"eslint": "^5.14.1",
+		"nyc": "^13.3.0",
 		"nyc-config-common": "^1.0.1",
-		"tape": "^4.9.2"
+		"tape": "^4.10.1"
 	},
 	"eslintConfig": {
 		"extends": "@shinnn"
